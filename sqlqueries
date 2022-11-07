@@ -1,0 +1,22 @@
+#query to create the table
+CREATE TABLE Nsedata{
+    ID INT NOT NULL AUTO_INCREMENT,
+    Symbol VARCHAR(50),
+    NameOfCompanay VARCHAR(50)
+    Series VARCHAR(20),
+    DateOfListing DATE,
+    PaidUpValue INT,
+    MarketLot INt,
+    FaceValue INT,
+    Open FLOAT,
+    High FLOAT,
+    Low  FLOAT,
+    Close FLOAT,
+    Last  FLOAT,
+    PrevClose  FLOAT,
+    TottedQty INT ,
+    TottrdVal  FLOAT,
+    timeStamp  TIMESTAMP(DD-MM-YY),
+    Isin  varchar(255) ,
+
+}
