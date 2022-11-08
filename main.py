@@ -12,10 +12,7 @@ import os,time
 import pandas as pd
 
 
-"""def launchbrowser():
-    #chromeoptions = webdriver.ChromeOptions() 
-
-    #chromeoptions.add_experimental_option("prefs",{"download.default_directory" : "C:/Users/manav/OneDrive/Desktop/My projects/zig"})
+  def launchbrowser():
 
     path='./chromedriver.exe'
     driver = webdriver.Chrome(path)
@@ -29,16 +26,11 @@ import pandas as pd
         driver.find_element(By.LINK_TEXT  ,"Securities available for Equity segment (.csv)").click()
         
         time.sleep(10)
-        
-        #driver.close()
-
     except:
         print("Invalid URL")
-    return driver"""
+    return driver
 
-
-def getbhav():
-
+  def getbhav():
     data_path=os.path.join('C:',os.sep,'Users','manav','OneDrive','Desktop','My projects','zig','bhavdata')
     bhavcopy_save(date(2022,11,8),data_path)
     date_range=pd.bdate_range(start= '8/10/2022',end='08/11/2022',freq='C',holidays=holidays(2022))
@@ -57,5 +49,5 @@ def getbhav():
                 print(f'{dates}: File not Found')
 
 
-#g1=launchbrowser()
+g1=launchbrowser()
 g2=getbhav()
