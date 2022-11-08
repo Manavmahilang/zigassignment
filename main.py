@@ -3,7 +3,14 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-import time
+import requests
+from jugaad_data.nse import bhavcopy_save
+from jugaad_data.holidays import holidays
+from datetime import date
+from random import randint
+import os,time
+import pandas as pd
+
 
 """def launchbrowser():
     #chromeoptions = webdriver.ChromeOptions() 
@@ -31,23 +38,23 @@ import time
 
 
 def getbhav():
-    path='./chromedriver.exe'
-    driver = webdriver.Chrome(path)
-    driver.maximize_window()
-    
-    try:
-        driver.get("https://www.nseindia.com/all-reports")
-        WebDriverWait(driver, 20).until(EC.visibility_of_all_elements_located((By.XPATH, "//a[@aria-label='Download File']")))
-        #driver.find_element(By.ID, "crEquityDailySearch").send_keys("bhavcopy")
-        #driver.find_element(By.CLASS_NAME, "pdf-download-link").click()
 
-        
-        
-        time.sleep(20)
-    except:
-        print("Invalid URL")
-    return driver
+    data_path=os.path.join('C:',os.sep,'Users','manav','OneDrive','Desktop','My projects','zig','bhavdata')
+    bhavcopy_save(date(2022,11,8),data_path)
+    date_range=pd.bdate_range(start= '8/10/2022',end='08/11/2022',freq='C',holidays=holidays(2022))
 
+    dates_2022=[x.date() for x in date_range]
+    for dates in dates_2022:
+        try:
+            bhavcopy_save(dates, data_path)
+            time.sleep(randint(1,4)) #adding random delay of 1-4 seconds
+        except (ConnectionError, requests.exceptions.ReadTimeout) as e:
+            time.sleep(10) #stop program for 10 seconds and try again.
+            try:
+                bhavcopy_save(dates, data_path)
+                time.sleep(randint(1,4))
+            except (ConnectionError, requests.exceptions.ReadTimeout) as e:
+                print(f'{dates}: File not Found')
 
 
 #g1=launchbrowser()
